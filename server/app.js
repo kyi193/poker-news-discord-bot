@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const express = require("express");
+const cors = require('cors');
 const { join } = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -9,7 +10,9 @@ const pingRouter = require("./routes/ping");
 
 const { json, urlencoded } = express;
 
-var app = express();
+const app = express();
+
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(json());
