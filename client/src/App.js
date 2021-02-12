@@ -12,7 +12,7 @@ function App() {
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
         <div>
-          Whats up haha go brr
+          Whats up haha go brrttrrsdsad
         </div>
       </BrowserRouter>
     </MuiThemeProvider>
