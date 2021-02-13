@@ -12,6 +12,7 @@ connectDB();
 
 const indexRouter = require("./routes/index");
 const pingRouter = require("./routes/ping");
+const articleRouter = require("./routes/articles");
 
 const { json, urlencoded } = express;
 
@@ -27,6 +28,7 @@ app.use(express.static(join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/ping", pingRouter);
+app.use("/articles", articleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
