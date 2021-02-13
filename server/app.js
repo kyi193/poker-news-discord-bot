@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require('mongoose');
 const connectDB = require('./config/db');
+const passport = require('passport');
 
 // Connect to MongoDB
 connectDB();
@@ -18,6 +19,8 @@ const userRouter = require("./routes/users");
 const { json, urlencoded } = express;
 
 const app = express();
+
+require('./config/passport')(passport);
 
 app.use(cors());
 
