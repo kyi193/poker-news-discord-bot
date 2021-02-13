@@ -4,6 +4,11 @@ const cors = require('cors');
 const { join } = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const mongoose = require('mongoose');
+const connectDB = require('./config/db');
+
+// Connect to MongoDB
+connectDB();
 
 const indexRouter = require("./routes/index");
 const pingRouter = require("./routes/ping");
