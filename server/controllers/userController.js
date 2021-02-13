@@ -1,5 +1,6 @@
 const UserModel = require('../models/User');
 const validateRegister = require('../user-validation/register');
+const validateLogin = require('../user-validation/login');
 const { SECRET_KEY } = process.env;
 const jwt = require('jsonwebtoken');
 
@@ -12,6 +13,23 @@ const register = (req, res) => {
   }
 
   const user = UserModel.registerUser(req);
+  user.then((data) => {
+    if (data.error) {
+      res.status(400).json({ error: data.error });
+    } else {
+      createTokenResponse(data.user, res);
+    }
+  });
+};
+
+const login = (req, res) => {
+  const { errors, isValid } = validateLogin(req.body);
+  
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  
+  const user = UserModel.loginUser(req);
   user.then((data) => {
     if (data.error) {
       res.status(400).json({ error: data.error });
@@ -40,5 +58,6 @@ const createTokenResponse = (user, res) => {
 }
 
 module.exports = {
-  register
+  register,
+  login
 };

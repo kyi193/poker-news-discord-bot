@@ -73,4 +73,22 @@ const registerUser = async (req) => {
   }
 }
 
-module.exports = { User, registerUser };
+const loginUser = async (req) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+  
+  if (!user) {
+    return { error: 'Username or password was incorrect' };
+  }
+
+  const validPass = await bcrypt.compare(password, user.password);
+
+  if (validPass) {
+    return { user };
+  } else {
+    return { error: 'Username or password was incorrect' };
+  }
+}
+
+module.exports = { User, registerUser, loginUser };
