@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 
 const opts = {
@@ -49,4 +50,27 @@ const UserSchema = new Schema(
 
 const User = mongoose.model('User', UserSchema);
 
-module.exports = { User };
+const registerUser = async (req) => {
+  const { email, firstName, lastName, password } = req.body;
+  const user = await User.findOne({ email });
+  if (user) {
+    return { error: 'Email already exists' };
+  }
+
+  try {
+    let newUser = new User({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+    newUser.password = bcrypt.hashSync(newUser.password, 10);
+    newUser = await newUser.save();
+
+    return { user: newUser };
+  } catch (err) {
+    return { error: err.message };
+  }
+}
+
+module.exports = { User, registerUser };
