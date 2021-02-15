@@ -7,14 +7,14 @@ const ArticleFeed = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    Axios.get('/search')
+    Axios.get('/articles')
       .then(res => setArticles(res.data))
       .catch(err => console.error(err));  
   }, []);
 
   useEffect(() => {
     if(articles) setArticlesForPage(articles.slice(page-1, page*10)); 
-  }, [articles]);
+  }, [articles, page]);
 
   const decrementPage = () => {
     if(page === 1) return;
@@ -39,8 +39,8 @@ const ArticleFeed = () => {
         <div style ={{ marginLeft: '50px' }}>
           {articlesForPage.map(article => {
             return (
-              <div key={article.id}>
-                <a href={article.link} target="_blank" rel="noreferrer">{article.title}</a>
+              <div key={article._id}>
+                <a href={article.url} target="_blank" rel="noreferrer">{article.title}</a>
                 <p>{`Published: ${article.published}`}</p>
               </div>
             )
