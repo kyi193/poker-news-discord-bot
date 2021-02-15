@@ -7,3 +7,7 @@ export const loginUser = (formData) => {
 export const getUser = () => {
   return Axios.get('/users');
 };
+
+export const addUserArticle = (articleId) => {
+  return Axios.post(`/users/addArticle`, { _id: articleId });
+};

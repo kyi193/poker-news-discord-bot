@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
+import { addUserArticle } from '../utils/apiEndpoints';
 
 const ArticleFeed = () => {
   const [articles, setArticles] = useState(null);
@@ -30,6 +31,10 @@ const ArticleFeed = () => {
     setPage(page+1);
   }
 
+  const addArticle = async (articleId) => {
+    await addUserArticle(articleId);
+  }
+
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -42,6 +47,7 @@ const ArticleFeed = () => {
               <div key={article._id}>
                 <a href={article.url} target="_blank" rel="noreferrer">{article.title}</a>
                 <p>{`Published: ${article.published}`}</p>
+                <button onClick={() => addArticle(article._id)}>Add to list</button>
               </div>
             )
           })}
