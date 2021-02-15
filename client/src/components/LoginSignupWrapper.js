@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Grid, Typography} from '@material-ui/core';
 import { useStyles } from '../themes/theme';
+import { getUser } from '../utils/apiEndpoints';
+import { useHistory } from 'react-router-dom';
 
 const LoginSignupWrapper = ({ children, text }) => {
   const classes = useStyles();
+  const history = useHistory();
+
+  const fetchUser = useCallback(async () => {
+    try {
+      await getUser();
+      history.push('/articles');
+    } catch (error) {
+      return;
+    }
+  }, [history]);
+
+  useEffect(() => {
+    fetchUser();
+  },
+    [fetchUser]);
 
   return (
     <div className={classes.loginSignupWrapperRoot}>

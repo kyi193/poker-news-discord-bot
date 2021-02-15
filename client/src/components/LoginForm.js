@@ -5,6 +5,7 @@ import { CustomButton } from './Buttons';
 import { loginUser } from '../utils/apiEndpoints';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../actions';
+import { useHistory } from 'react-router-dom';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const LoginForm = () => {
     password: ''
   });
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const classes = useStyles();
   
@@ -26,10 +28,10 @@ const LoginForm = () => {
       const data = res.data.user;
 
       dispatch(userLogin(data));
+      history.push('/articles');
     } catch (e) {
       console.error(e);
     }
-    
   };
 
   return (
