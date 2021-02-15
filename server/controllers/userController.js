@@ -39,6 +39,10 @@ const login = (req, res) => {
   });
 };
 
+const getUser = (req, res) => {
+  res.status(200).json({ user: req.user });
+}
+
 const createTokenResponse = (user, res) => {
   const payload = { userId: user._id };
   return jwt.sign(
@@ -59,5 +63,6 @@ const createTokenResponse = (user, res) => {
 
 module.exports = {
   register,
-  login
+  login,
+  getUser
 };
