@@ -3,12 +3,15 @@ import {FormControl, InputLabel, OutlinedInput, Typography } from '@material-ui/
 import { useStyles } from '../themes/theme';
 import { CustomButton } from './Buttons';
 import { loginUser } from '../utils/apiEndpoints';
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../actions';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const dispatch = useDispatch();
 
   const classes = useStyles();
   
@@ -18,8 +21,15 @@ const LoginForm = () => {
 
   const login = async (e) => {
     e.preventDefault();
+    try {
+      const res = await loginUser(formData);
+      const data = res.data.user;
 
-    const res = await loginUser(formData);
+      dispatch(userLogin(data));
+    } catch (e) {
+      console.error(e);
+    }
+    
   };
 
   return (
