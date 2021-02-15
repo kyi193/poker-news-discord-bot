@@ -1,4 +1,6 @@
 const UserModel = require('../models/User');
+const { User } = require('../models/User');
+const { Article } = require('../models/Article');
 const validateRegister = require('../user-validation/register');
 const validateLogin = require('../user-validation/login');
 const { SECRET_KEY } = process.env;
@@ -43,6 +45,28 @@ const getUser = (req, res) => {
   res.status(200).json({ user: req.user });
 }
 
+const addArticle = async (req, res) => {
+  const { id } = req.user;
+  const { _id } = req.body;
+
+  try {
+    const user = await User.findOne({ _id: id });
+    const article = await Article.findOne({ _id });
+    
+    if(!user.articles.includes(_id)) {
+      user.articles.push(article);
+      user.save();
+      res.status(200).json(user);
+    } else {
+      res.status(409).json({ error: "Article already exists in list." });
+    };
+    
+  } catch (e) {
+    console.error(e);
+    res.status(400).json({ error: e });
+  };
+}
+
 const createTokenResponse = (user, res) => {
   const payload = { userId: user._id };
   return jwt.sign(
@@ -64,5 +88,6 @@ const createTokenResponse = (user, res) => {
 module.exports = {
   register,
   login,
-  getUser
+  getUser,
+  addArticle
 };
