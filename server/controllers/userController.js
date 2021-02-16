@@ -67,6 +67,18 @@ const addArticle = async (req, res) => {
   };
 }
 
+const getArticles = async (req, res) => {
+  const { id } = req.user;
+
+  try {
+    const user = await User.findOne({ _id: id }).populate('articles');
+    res.status(200).json(user.articles);
+  } catch (e) {
+    console.error(e);
+    res.status(400).json({ error: e });
+  };
+}
+
 const createTokenResponse = (user, res) => {
   const payload = { userId: user._id };
   return jwt.sign(
@@ -89,5 +101,6 @@ module.exports = {
   register,
   login,
   getUser,
-  addArticle
+  addArticle,
+  getArticles
 };

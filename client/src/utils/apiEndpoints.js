@@ -11,3 +11,7 @@ export const getUser = () => {
 export const addUserArticle = (articleId) => {
   return Axios.post(`/users/addArticle`, { _id: articleId });
 };
+
+export const getUserArticles = () => {
+  return Axios.get(`/users/getArticles`);
+};

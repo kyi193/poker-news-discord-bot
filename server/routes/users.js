@@ -18,4 +18,10 @@ router.post(
   userController.addArticle
 );
 
+router.get(
+  '/getArticles',
+  passport.authenticate('jwt', { session: false }),
+  userController.getArticles
+);
+
 module.exports = router;
