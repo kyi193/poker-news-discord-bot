@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {FormControl, InputLabel, OutlinedInput, Typography } from '@material-ui/core';
 import { useStyles } from '../themes/theme';
 import { CustomButton } from './Buttons';
-import { loginUser } from '../utils/apiEndpoints';
+import { loginUser, getUserArticles } from '../utils/apiEndpoints';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../actions';
 import { useHistory } from 'react-router-dom';
@@ -25,9 +25,10 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const res = await loginUser(formData);
+      const articles = (await getUserArticles()).data;
       const data = res.data.user;
 
-      dispatch(userLogin(data));
+      dispatch(userLogin(data, articles));
       history.push('/articles');
     } catch (e) {
       console.error(e);

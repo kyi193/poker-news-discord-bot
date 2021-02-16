@@ -4,7 +4,8 @@ const user = (state = {}, action) => {
     case USER_LOGIN:
       return {
         ...state,
-        user: action.data
+        user: action.data,
+        articles: action.articles
       }
     default:
       return state
