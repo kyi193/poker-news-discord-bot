@@ -84,6 +84,9 @@ export const useStyles = makeStyles(
       width: '50%', 
       boxShadow: '0 0 10px gray', 
       backgroundColor: 'white'
+    },
+    articleContainerHighlighted: {
+      backgroundColor: colors.lightGray
     }
   }),
 );
