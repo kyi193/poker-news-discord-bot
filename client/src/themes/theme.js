@@ -87,6 +87,17 @@ export const useStyles = makeStyles(
     },
     articleContainerHighlighted: {
       backgroundColor: colors.lightGray
+    },
+    articleTable: {
+      width: '80%',
+      margin: 'auto',
+      borderWidth: 1,
+      borderColor: 'black',
+    },
+    addRemoveButton: {
+      height: '24px',
+      width: '80px',
+      fontFamily: 'Roboto'
     }
   }),
 );
