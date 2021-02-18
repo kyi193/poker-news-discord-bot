@@ -30,4 +30,10 @@ router.delete(
   userController.removeArticle
 );
 
+router.post(
+  '/logout',
+  passport.authenticate('jwt', { session: false }),
+  userController.logout
+);
+
 module.exports = router;

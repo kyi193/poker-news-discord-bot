@@ -94,6 +94,11 @@ const removeArticle = async (req, res) => {
   }
 }
 
+const logout = (req, res) => {
+  res.clearCookie('token');
+  return res.sendStatus(200);
+}
+
 const createTokenResponse = (user, res) => {
   const payload = { userId: user._id };
   return jwt.sign(
@@ -118,5 +123,6 @@ module.exports = {
   getUser,
   addArticle,
   getArticles,
-  removeArticle
+  removeArticle,
+  logout
 };
