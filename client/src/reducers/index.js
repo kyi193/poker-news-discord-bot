@@ -1,4 +1,5 @@
-import { USER_LOGIN } from '../actions'
+import { USER_LOGIN, USER_LOGOUT } from '../actions';
+
 const user = (state = {}, action) => {
   switch (action.type) {
     case USER_LOGIN:
@@ -6,7 +7,9 @@ const user = (state = {}, action) => {
         ...state,
         user: action.data,
         articles: action.articles
-      }
+      };
+    case USER_LOGOUT:
+      return {};
     default:
       return state
   }
