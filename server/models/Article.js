@@ -29,4 +29,17 @@ const ArticleSchema = new Schema(
 
 const Article = mongoose.model('Article', ArticleSchema);
 
-module.exports = { Article };
+const getArticlesForDiscord = async (articleList) => {
+  const articles = [];
+  for(const articleId of articleList) {
+    try {
+      const article = await Article.findById({ _id: articleId });
+      articles.push(article)
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  return articles;
+}
+
+module.exports = { Article, getArticlesForDiscord };
