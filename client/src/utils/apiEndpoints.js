@@ -1,5 +1,9 @@
 import Axios from 'axios';
 
+export const registerUser = (formData) => {
+  return Axios.post('/users/register', formData);
+}
+
 export const loginUser = (formData) => {
   return Axios.post('/users/login', formData);
 }

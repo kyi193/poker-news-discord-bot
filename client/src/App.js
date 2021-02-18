@@ -8,6 +8,7 @@ import reducer from './reducers';
 import middleware from './middleware'; 
 import { theme } from "./themes/theme";
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Routes from './routing/Routes';
 
 import "./App.css";
@@ -19,6 +20,7 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path= "/login" component={Login} />
+            <Route exact path= "/register" component={Register} />
             <Route component={Routes} />
           </Switch>
         </BrowserRouter>

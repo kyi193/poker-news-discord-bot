@@ -85,6 +85,16 @@ export const useStyles = makeStyles(
       boxShadow: '0 0 10px gray', 
       backgroundColor: 'white'
     },
+    signupCard: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '70%', 
+      width: '50%', 
+      boxShadow: '0 0 10px gray', 
+      backgroundColor: 'white'
+    },
     articleContainerHighlighted: {
       backgroundColor: colors.lightGray
     },
