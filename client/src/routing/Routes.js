@@ -11,7 +11,6 @@ const Routes = () => {
       <Navbar />
       <Switch>
         <PrivateRoute exact path='/articles' component={ArticleFeed} />
-        <Route path='/' component={Register} />
       </Switch>
     </>
   );
