@@ -12,8 +12,8 @@ import {
   TableRow,
   Typography,
 } from '@material-ui/core';
-import { CustomButton } from './Buttons'
-import { userLogin } from '../actions'
+import { userLogin } from '../actions';
+import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 
 const ArticleFeed = () => {
   const dispatch = useDispatch();
@@ -77,9 +77,6 @@ const ArticleFeed = () => {
   
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="h3">Articles</Typography>
-      </div>
       {articlesForPage ?
       <div> 
         <TableContainer>
@@ -114,11 +111,10 @@ const ArticleFeed = () => {
                     <TableCell component='th' scope='row'>
                       <Typography>{article.published.slice(0,16)}</Typography>
                     </TableCell>
-                    <TableCell component='th' scope='row'>
+                    <TableCell component='th' scope='row' align='center'>
                       {!userArticleIds.includes(article._id) ?
-                        <CustomButton classField={classes.addRemoveButton} text="Add" onClick={() => addArticle(article._id)}></CustomButton> :
-                        <CustomButton classField={classes.addRemoveButton} text="Remove" onClick={() => removeArticle(article._id)}></CustomButton>}
-                      
+                        <AddIcon className={classes.addArticleIcon} onClick={() => addArticle(article._id)} /> :
+                        <RemoveIcon className={classes.removeArticleIcon} text="Remove" onClick={() => removeArticle(article._id)} />}
                     </TableCell>
                 </TableRow>
                 )

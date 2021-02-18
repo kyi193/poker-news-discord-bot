@@ -7,6 +7,7 @@ export const colors = {
   pastelRed: '#DE5252',
   orange: '#CD552B',
   offWhite: '#F0F0F0',
+  pastelGreen: '#1ff526'
 };
 
 export const theme = createMuiTheme({
@@ -116,7 +117,23 @@ export const useStyles = makeStyles(
       height: '24px',
       width: '80px',
       fontFamily: 'Roboto'
-    }
+    },
+    addArticleIcon: {
+      height: '35px',
+      width: '35px',
+      backgroundColor: colors.pastelGreen,
+      color: 'white',
+      cursor: 'pointer',
+      borderRadius: 5
+    },
+    removeArticleIcon: {
+      height: '35px',
+      width: '35px',
+      backgroundColor: colors.pastelRed,
+      color: 'white',
+      cursor: 'pointer',
+      borderRadius: 5
+    },
   }),
 );
 
