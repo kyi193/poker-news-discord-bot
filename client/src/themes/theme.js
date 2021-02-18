@@ -6,7 +6,7 @@ export const colors = {
   lightGray: '#5F5F5F',
   pastelRed: '#DE5252',
   orange: '#CD552B',
-  offWhite: '#F0F0F0'
+  offWhite: '#F0F0F0',
 };
 
 export const theme = createMuiTheme({
@@ -73,7 +73,15 @@ export const useStyles = makeStyles(
       background: colors.pastelRed,
       color: 'white',
       fontWeight: 500,
-      fontFamily: 'Roboto'
+      fontFamily: 'Roboto',
+      marginBottom: '10px'
+    },
+    loginSignupToggleButton: {
+      width: '250px',
+      background: 'white',
+      color: colors.pastelRed,
+      fontWeight: 500,
+      fontFamily: 'Roboto',
     },
     loginCard: {
       display: 'flex',

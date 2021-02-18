@@ -59,6 +59,10 @@ const LoginForm = () => {
           classField={classes.loginButton} 
           text="Login"
           onClick={login} />
+        <CustomButton 
+          classField={classes.loginSignupToggleButton} 
+          text="Don't have an account? Register"
+          onClick={() => history.push('/register')} />
       </form>
     </div>
   );
