@@ -24,4 +24,10 @@ router.get(
   userController.getArticles
 );
 
+router.delete(
+  '/removeArticle/:articleId',
+  passport.authenticate('jwt', { session: false }),
+  userController.removeArticle
+);
+
 module.exports = router;

@@ -79,6 +79,21 @@ const getArticles = async (req, res) => {
   };
 }
 
+const removeArticle = async (req, res) => {
+  const { id } = req.user; 
+  const { articleId } = req.params;
+
+  try {
+    const user = await User.findOne({ _id: id });
+    user.articles.pull({ _id: articleId });
+    user.save();
+    res.status(204).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("No user found");
+  }
+}
+
 const createTokenResponse = (user, res) => {
   const payload = { userId: user._id };
   return jwt.sign(
@@ -102,5 +117,6 @@ module.exports = {
   login,
   getUser,
   addArticle,
-  getArticles
+  getArticles,
+  removeArticle
 };
