@@ -10,6 +10,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { colors } from '../themes/theme';
 import { logoutUser } from '../utils/apiEndpoints';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userLogout } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +31,8 @@ const Navbar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
 
@@ -44,6 +49,8 @@ const Navbar = () => {
   const logout = async () => {
     try {
       await logoutUser();
+      history.push('/login');
+      dispatch(userLogout());
     } catch (e) {
       console.error(e);
     }
