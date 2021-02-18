@@ -7,8 +7,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from './reducers';
 import middleware from './middleware'; 
 import { theme } from "./themes/theme";
-import ArticleFeed from './components/ArticleFeed';
 import Login from './pages/Login';
+import Routes from './routing/Routes';
 
 import "./App.css";
 
@@ -18,8 +18,8 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <Switch>
-            <Route exact path= "/articles" component={ArticleFeed} />
             <Route exact path= "/login" component={Login} />
+            <Route component={Routes} />
           </Switch>
         </BrowserRouter>
       </MuiThemeProvider>
