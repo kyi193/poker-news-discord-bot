@@ -12,6 +12,10 @@ export const addUserArticle = (articleId) => {
   return Axios.post(`/users/addArticle`, { _id: articleId });
 };
 
+export const removeUserArticle = (articleId) => {
+  return Axios.delete(`/users/removeArticle/${articleId}`);
+};
+
 export const getUserArticles = () => {
   return Axios.get(`/users/getArticles`);
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-import { addUserArticle, getUser, getUserArticles } from '../utils/apiEndpoints';
+import { addUserArticle, getUser, getUserArticles, removeUserArticle } from '../utils/apiEndpoints';
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from '../themes/theme';
 import {
@@ -63,9 +63,17 @@ const ArticleFeed = () => {
     dispatch(userLogin(user, articles));  
   };
 
+  const removeArticle = async (articleId) => {
+    await removeUserArticle(articleId);
+    const user = (await getUser()).data.user;
+    const articles = (await getUserArticles()).data;
+
+    dispatch(userLogin(user, articles));  
+  };
+
   useEffect(() => {
     setUserArticleIds(userArticleSelector);
-  }, [addArticle]);
+  }, [addArticle, removeArticle]);
   
   return (
     <div>
@@ -109,7 +117,7 @@ const ArticleFeed = () => {
                     <TableCell component='th' scope='row'>
                       {!userArticleIds.includes(article._id) ?
                         <CustomButton classField={classes.addRemoveButton} text="Add" onClick={() => addArticle(article._id)}></CustomButton> :
-                        <CustomButton classField={classes.addRemoveButton} text="Remove"></CustomButton>}
+                        <CustomButton classField={classes.addRemoveButton} text="Remove" onClick={() => removeArticle(article._id)}></CustomButton>}
                       
                     </TableCell>
                 </TableRow>
