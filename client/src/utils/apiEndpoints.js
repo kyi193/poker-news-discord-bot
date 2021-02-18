@@ -23,3 +23,7 @@ export const removeUserArticle = (articleId) => {
 export const getUserArticles = () => {
   return Axios.get(`/users/getArticles`);
 };
+
+export const logoutUser = () => {
+  return Axios.post('/users/logout');
+};

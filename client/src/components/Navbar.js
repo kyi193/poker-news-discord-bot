@@ -9,6 +9,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { colors } from '../themes/theme';
+import { logoutUser } from '../utils/apiEndpoints';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +39,14 @@ const Navbar = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logout = async () => {
+    try {
+      await logoutUser();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -76,7 +85,7 @@ const Navbar = () => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>My Account</MenuItem>
-                <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                <MenuItem onClick={() => logout()}>Log Out</MenuItem>
               </Menu>
             </div>
         </Toolbar>
