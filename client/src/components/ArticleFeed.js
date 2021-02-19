@@ -31,9 +31,9 @@ const ArticleFeed = () => {
   }, []);
 
   useEffect(() => {
-    if(articles) setArticlesForPage(articles.slice(page-1, page*10));
+    if(articles) setArticlesForPage(articles.slice(0, 10));
     setUserArticleIds(getUserArticleIds());
-  }, [articles, page]);
+  }, [articles]);
 
   const getUserArticleIds = () => {
     return userArticleSelector ? 
@@ -44,14 +44,13 @@ const ArticleFeed = () => {
   const decrementPage = () => {
     if(page === 1) return;
     const newPage = page-1;
-    setArticlesForPage(articles.slice(newPage*10, (newPage*10)+10));
+    setArticlesForPage(articles.slice((newPage-1)*10, ((newPage-1)*10)+10));
     setPage(page-1);
   }
 
   const incrementPage = () => {
     if(page === 9) return;
-    const newPage = page+1;
-    setArticlesForPage(articles.slice(newPage*10, (newPage*10)+10));
+    setArticlesForPage(articles.slice(page*10, (page*10)+10));
     setPage(page+1);
   }
 
@@ -74,7 +73,7 @@ const ArticleFeed = () => {
   useEffect(() => {
     setUserArticleIds(userArticleSelector);
   }, [addArticle, removeArticle]);
-  
+
   return (
     <div>
       {articlesForPage ?
