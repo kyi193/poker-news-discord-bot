@@ -37,7 +37,6 @@ app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(join(__dirname, "public")));
 
 app.use(passport.initialize());
 
@@ -45,6 +44,14 @@ app.use("/", indexRouter);
 app.use("/ping", pingRouter);
 app.use("/articles", articleRouter);
 app.use("/users", userRouter);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(join(__dirname, 'client/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(join(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
