@@ -5,21 +5,11 @@ const { Article } = ArticleModel;
 const fs = require('fs');
 const e = require('express');
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect("mongodb://localhost:27017/poker-news", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    });
-    console.log('MongoDB Connected!');
-  } catch (err) {
-    console.error(err.message);
-    // Exit process with failure
-    process.exit(1);
-  }
-};  
+const connectAtlasDB = async () => {
+  mongoose.connect(process.env.MONGO_ATLAS_URI,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
+  .then(() => console.log("Database Connected Successfully"))
+  .catch(err => console.log(err));
+};
 
 const populate = (async () => {
   const articles = await JSON.parse(fs.readFileSync('articles.json', 'utf-8'));
@@ -37,5 +27,5 @@ const populate = (async () => {
   mongoose.disconnect();
 })
 
-connectDB();
+connectAtlasDB();
 populate();

@@ -5,7 +5,7 @@ const { join } = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require('mongoose');
-const connectDB = require('./config/db');
+const { connectDB, connectAtlasDB } = require('./config/db');
 const passport = require('passport');
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -18,7 +18,7 @@ let authenticated = false;
 let articles;
 
 // Connect to MongoDB
-connectDB();
+connectAtlasDB();
 
 const indexRouter = require("./routes/index");
 const pingRouter = require("./routes/ping");
