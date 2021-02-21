@@ -72,6 +72,7 @@ const RegisterForm = () => {
             id="component-outlined" 
             label="Password"
             name="password"
+            type="password"
             onChange={onInputChange} />
         </FormControl>
         <FormControl className={classes.form} variant="outlined">
@@ -80,6 +81,7 @@ const RegisterForm = () => {
             id="component-outlined" 
             label="Password"
             name="password2"
+            type="password"
             onChange={onInputChange} />
         </FormControl>
         <CustomButton 

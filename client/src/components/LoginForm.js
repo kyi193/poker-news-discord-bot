@@ -53,6 +53,7 @@ const LoginForm = () => {
             id="component-outlined" 
             label="Password"
             name="password"
+            type="password"
             onChange={onInputChange} />
         </FormControl>
         <CustomButton 
