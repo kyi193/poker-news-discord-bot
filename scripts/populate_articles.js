@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
 const ArticleModel = require('../models/Article');
 const { Article } = ArticleModel;
+const path = require('path');
+require('dotenv').config({path: path.resolve('../.env')});
+const { connectDB } = require('../config/db');
 
 const fs = require('fs');
-const e = require('express');
-
-const connectAtlasDB = async () => {
-  mongoose.connect(process.env.MONGO_ATLAS_URI,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
-  .then(() => console.log("Database Connected Successfully"))
-  .catch(err => console.log(err));
-};
 
 const populate = (async () => {
   const articles = await JSON.parse(fs.readFileSync('articles.json', 'utf-8'));
@@ -27,5 +23,5 @@ const populate = (async () => {
   mongoose.disconnect();
 })
 
-connectAtlasDB();
+connectDB();
 populate();

@@ -18,7 +18,7 @@ let authenticated = false;
 let articles;
 
 // Connect to MongoDB
-connectAtlasDB();
+connectDB();
 
 const indexRouter = require("./routes/index");
 const pingRouter = require("./routes/ping");
@@ -82,7 +82,7 @@ client.on('message', async (message) => {
       message.channel.send("Invalid Input");
       return;
     }
-    
+
     const loginCredentials = {
       email: stringArr[1],
       password: stringArr[2]
@@ -131,4 +131,3 @@ client.on('message', async (message) => {
 client.login(DISCORD_API_TOKEN);
 
 module.exports = app;
-
